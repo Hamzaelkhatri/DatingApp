@@ -1,0 +1,22 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="colorPrimary">#FE547A</item>
+        <item name="colorPrimaryDark">#8971C9</item>
+        <item name="colorAccent">#FF4771</item>
+        <item name="android:statusBarColor">#8971C9</item>
+        <item name="android:navigationBarColor">#8971C9</item>
+    </style>
+    <style name="Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="colorPrimary">#FE547A</item>
+        <item name="colorPrimaryDark">#8971C9</item>
+        <item name="colorAccent">#FF4771</item>
+        <item name="android:statusBarColor">#00FF0000</item>
+        <item name="android:navigationBarColor">#00ff0000</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>

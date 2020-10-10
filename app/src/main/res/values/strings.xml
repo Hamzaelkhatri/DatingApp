@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">dating</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="skip">Skip</string>
+    <string name="discover">Discover</string>
+    <string name="large_string">Particular unaffected projection sentiments no my. Music marry as at cause party worth weeks.</string>
+    <string name="get_started">Sign in</string>
+    <string name="allready_have_an_account">Allready have an account?<font color='#EE0000' fontStyle='bold'> <b>Login</b></font></string>
+    <string name="dating_app">Dating App</string>
+    <string name="login">Login</string>
+    <string name="sign_in">Sign in</string>
+    <string name="name">Jhon Walker</string>
+    <string name="name_lastName">name</string>
+    <string name="number">0535343734</string>
+    <string name="register">Register</string>
+    <string name="or">OR</string>
+    <string name="facebook">Facebook</string>
+    <string name="i_don_t_an_account_sign_up">I don\'t have an account! <font color='#EE0000' fontStyle='bold'> <b>Sign up</b></font></string>
+    <string name="resend">Resend</string>
+    <string name="confirme_opt">Confirmation</string>
+    <string name="confirme">confirme</string>
+    <string name="please_type_the_verification_code_ncode_send_to_your_number_phone">Please type the verification code\ncode send to your number phone</string>
+    <string name="made_by_hs_developers_with">Made by Hs developers with <font color='#EE0000'>💖.</font></string>
+    <string name="i_accept_the_terms_and_conditions">I accept the  <a color='#0068FF' href="https://hello.com">terms and conditions</a></string>
+
+</resources>

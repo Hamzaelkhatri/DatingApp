@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignIn">
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_sign_in_xml_constraintlayout_scene">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutCompat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/countryCodeHolder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:ccp_autoDetectCountry="true"
+                    app:ccp_countryAutoDetectionPref="NETWORK_LOCALE"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="30dp"
+                    app:ccp_showFullName="false"
+                    app:ccp_arrowColor="#FF4771"
+                    app:ccp_contentColor="#706F6F"
+                    app:ccp_defaultLanguage="ENGLISH"
+                    app:ccp_flagBorderColor="#FF4771"
+                    app:ccp_showPhoneCode="true" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="#8AD3D1D1" />
+            </LinearLayout>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/Phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="16dp"
+                android:inputType="phone"
+                android:layout_marginEnd="30dp"
+                android:backgroundTint="#FF4771"
+                android:elevation="2dp"
+                android:maxLength="15"
+                android:focusable="true"
+                android:fontFamily="@font/regulare"
+                android:hint="@string/number"
+                android:textColorHint="#706F6F"
+                app:met_errorColor="#FF4771"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelAlwaysShown="true"
+                app:met_floatingLabelText="Phone"
+                app:met_floatingLabelTextSize="15sp"
+                app:met_textColorHint="#BCB9B9" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="16dp"
+                android:textColor="#fff"
+                android:layout_marginEnd="30dp"
+                android:backgroundTint="#9673C5"
+                android:text="@string/register" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:checked="true"
+                    android:fontFamily="@font/regulare"
+                    android:linksClickable="true"
+                    android:textColor="#393939" />
+
+                <TextView
+                    android:id="@+id/conditionLink"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/regulare"
+                    android:linksClickable="true"
+                    android:autoLink="web"
+                    android:text="@string/i_accept_the_terms_and_conditions"
+                    />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/or"
+                android:textColor="#A5A4A4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="#322AF4"
+                    android:textColor="#fff"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/regulare"
+                    android:text="@string/facebook"
+                    android:textSize="@dimen/bottom_text_size" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="#FA3434"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="@dimen/bottom_text_size"
+                    android:fontFamily="@font/regulare"
+                    android:layout_weight="1"
+                    android:text="GOOGLE"
+                    android:textColor="#fff" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/login"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#F8F8FB"
+                android:fontFamily="@font/regulare"
+                android:gravity="center"
+                android:text="@string/allready_have_an_account"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#393939"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/signIn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/bold"
+            android:text="@string/sign_in"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#9673C5"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_path_97"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:backgroundTint="#00000000"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="15dp"
+            android:scaleType="fitXY"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</FrameLayout>

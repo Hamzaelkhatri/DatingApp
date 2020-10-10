@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:autoTransition="animateToEnd"
+        motion:duration="2000">
+       <KeyFrameSet>
+           <KeyAttribute
+               motion:motionTarget="@+id/back"
+               motion:framePosition="0"
+               android:translationX="-32dp" />
+           <KeyAttribute
+               motion:motionTarget="@+id/back"
+               motion:framePosition="40"
+               android:translationX="16dp" />
+           <KeyAttribute />
+           <KeyAttribute
+               motion:motionTarget="@+id/linearLayoutCompat"
+               motion:framePosition="0"
+               android:alpha="0.5" />
+           <KeyAttribute
+               motion:motionTarget="@+id/linearLayoutCompat"
+               motion:framePosition="0"
+               android:translationY="-30dp" />
+           <KeyAttribute
+               motion:motionTarget="@+id/signIn2"
+               motion:framePosition="0"
+               android:translationY="30dp" />
+           <KeyAttribute
+               motion:motionTarget="@+id/signIn2"
+               motion:framePosition="0"
+               android:translationY="30dp" />
+           <KeyAttribute
+               motion:motionTarget="@+id/signIn2"
+               motion:framePosition="0"
+               android:translationY="30dp" />
+       </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+    </ConstraintSet>
+</MotionScene>

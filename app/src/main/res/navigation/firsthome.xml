@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home"
+    app:startDestination="@id/first_home3">
+    <fragment
+        android:id="@+id/first_home3"
+        android:name="hs.beta.dating.first_home"
+        android:label="fragment_first_home"
+        tools:layout="@layout/fragment_first_home">
+        <action
+            android:id="@+id/action_first_home3_to_login3"
+            app:destination="@id/login3" />
+        <action
+            android:id="@+id/action_first_home3_to_signIn2"
+            app:destination="@id/signIn2" />
+    </fragment>
+    <fragment
+        android:id="@+id/login3"
+        android:name="hs.beta.dating.login"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login3_to_signIn2"
+            app:destination="@id/signIn2"
+            app:popUpTo="@id/first_home3" />
+    </fragment>
+    <fragment
+        android:id="@+id/signIn2"
+        android:name="hs.beta.dating.SignIn"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signIn2_to_login3"
+            app:destination="@id/login3"
+            app:popUpTo="@id/first_home3" />
+        <action
+            android:id="@+id/action_signIn2_to_opt_message"
+            app:destination="@id/opt_message" />
+    </fragment>
+    <fragment
+        android:id="@+id/opt_message"
+        android:name="hs.beta.dating.opt_message"
+        android:label="fragment_opt_message"
+        tools:layout="@layout/fragment_opt_message" >
+        <argument
+            android:name="phone"
+            app:argType="string"
+            android:defaultValue="0" />
+    </fragment>
+</navigation>
