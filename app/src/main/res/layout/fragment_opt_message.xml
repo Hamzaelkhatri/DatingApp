@@ -12,7 +12,7 @@
         android:id="@+id/motion_base"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutDescription="@xml/fragment_opt_message_xml_constraintlayout_scene">
+        app:layoutDescription="@xml/fragment_opt_message_scene">
 
         <TextView
             android:id="@+id/textView2"
@@ -193,7 +193,7 @@
             app:layout_constraintTop_toBottomOf="@+id/confirmation" />
 
         <TextView
-            android:id="@+id/madeby"
+            android:id="@+id/loving"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -205,5 +205,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toTopOf="@+id/loving"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:lottie_loop="false"
+            app:lottie_autoPlay="false"
+            android:alpha="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"
+            app:lottie_rawRes="@raw/love"/>
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </FrameLayout>

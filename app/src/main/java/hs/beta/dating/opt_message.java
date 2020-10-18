@@ -1,5 +1,6 @@
 package hs.beta.dating;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,8 +17,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
@@ -107,9 +111,11 @@ public class opt_message extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                {
+                                    Toast.makeText(getActivity(), "Good", Toast.LENGTH_LONG).show();
+                                }
                             } else {
-                                Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), "Not Good", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -132,16 +138,45 @@ public class opt_message extends Fragment {
             v4 = view.findViewById(R.id.v4);
             v5 = view.findViewById(R.id.v5);
             v6 = view.findViewById(R.id.v6);
-            madeBy=view.findViewById(R.id.madeby);
+            madeBy=view.findViewById(R.id.loving);
+            final LottieAnimationView animationView = view.findViewById(R.id.animate);
             motionLayout=view.findViewById(R.id.motion_base);
             madeBy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v)
                 {
-//                    motionLayout.getConstraintSet(R.id.start2).setVisibility(R.id.imageView2, View.INVISIBLE);
-//                    view.requestLayout();
-//                    motionLayout.setTransition(R.id.loves);
-//                    motionLayout.transitionToStart();
+                    animationView.setAnimation(R.raw.love);
+                    animationView.addAnimatorListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) { }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            animationView.setAlpha(0f);
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                            animationView.setAlpha(0f);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation)
+                        { }
+                    });
+                    animationView.setAlpha(1f);
+                    animationView.playAnimation();
+
+//                    Toast.makeText(getContext(),"DONE",Toast.LENGTH_LONG).show();
+
+//                    animationView.clearAnimation();
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                        }
+//                    });
+//                    animationView.playAnimation();
                 }
             });
 //            motionLayout.setTransition
@@ -150,12 +185,40 @@ public class opt_message extends Fragment {
             reSend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                 sendVerifiaction();//TODO
+
+                    animationView.setAnimation(R.raw.snedit);
+                    animationView.addAnimatorListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation)
+                        {
+                            animationView.setAlpha(0f);
+                            //                 sendVerifiaction();//TODO
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation)
+                        {
+                            animationView.setAlpha(0f);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation)
+                        {
+
+                        }
+                    });
+                    animationView.setAlpha(1f);
+                    animationView.playAnimation();
                 }
             });
             Verify = view.findViewById(R.id.verify);
             TextManger();
-            sendVerifiaction();
+           // sendVerifiaction();
         }
 
         private void TextManger() {
@@ -278,11 +341,8 @@ public class opt_message extends Fragment {
                 public void onClick(View v)
                 {
                     String code=v1.getText().toString()+v2.getText().toString()+v3.getText().toString()+v4.getText().toString()+v5.getText().toString()+v6.getText().toString();
-                    Toast.makeText(getContext(),code,Toast.LENGTH_LONG).show();
                     if(code.length()==6)
-                    {
                         verifyCode(code);
-                    }
                     else
                         Toast.makeText(getContext(), "Check the code", Toast.LENGTH_LONG).show();
                 }

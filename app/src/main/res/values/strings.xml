@@ -1,4 +1,6 @@
 <resources>
+    <string name="facebook_app_id">665944090713635</string>
+    <string name="fb_login_protocol_scheme">fb665944090713635</string>
     <string name="app_name">dating</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -23,5 +25,8 @@
     <string name="please_type_the_verification_code_ncode_send_to_your_number_phone">Please type the verification code\ncode send to your number phone</string>
     <string name="made_by_hs_developers_with">Made by Hs developers with <font color='#EE0000'>💖.</font></string>
     <string name="i_accept_the_terms_and_conditions">I accept the  <a color='#0068FF' href="https://hello.com">terms and conditions</a></string>
+    <string name="_047467346347">047467346347</string>
+    <string name="another_number">Another Number</string>
+    <string name="send_opt">Send OPT</string>
 
 </resources>

@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.sax.StartElementListener;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 public class Splash extends AppCompatActivity {
 
     @Override
@@ -15,6 +18,8 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         MotionLayout motionLayout = findViewById(R.id.motion_base);
+        AppEventsLogger.activateApp(getApplication());
+
         motionLayout.setTransitionListener(new MotionLayout.TransitionListener() {
             @Override
             public void onTransitionStarted(MotionLayout motionLayout, int i, int i1)

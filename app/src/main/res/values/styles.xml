@@ -19,4 +19,13 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+    <style name="FacebookLoginButton">
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginStart">1dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 </resources>
