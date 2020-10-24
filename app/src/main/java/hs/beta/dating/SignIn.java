@@ -36,6 +36,11 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.share.model.ShareOpenGraphValueContainer;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -44,6 +49,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.hbb20.CountryCodePicker;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import org.json.JSONObject;
@@ -52,10 +58,10 @@ import java.util.Calendar;
 public class SignIn extends Fragment {
 
 
-    public SignIn() {
-        // Required empty public constructor
-    }
+    private static final int RC_SIGN_IN = 9001;
 
+    public SignIn() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,13 +82,24 @@ public class SignIn extends Fragment {
     ImageView back;
     MaterialEditText Phone;
     LoginButton facebook;
+    NavController navigationView;
+    MaterialButton google;
+    private GoogleSignInClient mGoogleSignInClient;
+
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final NavController navigationView = Navigation.findNavController(view);
+        navigationView = Navigation.findNavController(view);
         countryCodeHolder = view.findViewById(R.id.countryCodeHolder);
+        google=view.findViewById(R.id.google);
         login = view.findViewById(R.id.login);
         back = view.findViewById(R.id.back);
         conditionLink = view.findViewById(R.id.conditionLink);
@@ -94,6 +111,17 @@ public class SignIn extends Fragment {
             @Override
             public void onClick(View v) {
                 facebook.performClick();
+            }
+        });
+        google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build();
+                mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+                signIn();
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
@@ -247,10 +275,57 @@ public class SignIn extends Fragment {
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        // [START_EXCLUDE silent]
+//        showProgressBar();
+        // [END_EXCLUDE]
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        //    updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(getActivity(), "Authentication Failed.", Toast.LENGTH_SHORT).show();
+//                            updateUI(null);
+                        }
+
+                        // [START_EXCLUDE]
+//                        hideProgressBar();
+                        // [END_EXCLUDE]
+                    }
+                });
+    }
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+                firebaseAuthWithGoogle(account.getIdToken());
+                getNumber();
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Log.w(TAG, "Google sign in failed", e);
+                // ...
+            }
+        }
+        else
+        {
+            mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 
@@ -265,7 +340,6 @@ public class SignIn extends Fragment {
             default:
                 break;
         }
-
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
@@ -294,15 +368,43 @@ public class SignIn extends Fragment {
 
     void G_Dialog(String str)
     {
-        Dialog dialog = new Dialog(getContext());
+        final Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.get_phone_number);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        TextView number = dialog.findViewById(R.id.number);
+        final TextView number = dialog.findViewById(R.id.number);
+        final TextView phone = dialog.findViewById(R.id.Phone);
+        MaterialButton materialButton = dialog.findViewById(R.id.opt);
+        materialButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!phone.getText().toString().isEmpty()) {
+                    if (Phone.getText().toString().isEmpty()) {
+                        Phone.findFocus();
+                        Phone.requestFocus();
+                        Phone.setError("Please set your phone number");
+                    } else if (Phone.getText().toString().length() < 9) {
+                        Phone.setError("Please set a exists phone number");
+                    } else if (!Phone.getText().toString().trim().matches("^[0-9]*$"))
+                        Phone.setError("Please set a exists phone format ex: 04733434343");
+                    else {
+                        SignInDirections.ActionSignIn2ToOptMessage action = SignInDirections.actionSignIn2ToOptMessage();
+                        action.setPhone( countryCodeHolder.getSelectedCountryCode() + phone.getText().toString().trim());
+                        navigationView.navigate(action);
+                    }
+                }
+                else
+                {
+                    SignInDirections.ActionSignIn2ToOptMessage action = SignInDirections.actionSignIn2ToOptMessage();
+                    action.setPhone(countryCodeHolder.getSelectedCountryCode() + phone);
+                    navigationView.navigate(action);
+                }
+                dialog.dismiss();
+            }
+        });
         number.setText(str);
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
     }
-
 }

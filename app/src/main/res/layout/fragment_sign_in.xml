@@ -147,7 +147,7 @@
                     android:textSize="@dimen/bottom_text_size"
                     android:fontFamily="@font/regulare"
                     android:layout_weight="1"
-                    android:text="GOOGLE"
+                    android:text="@string/google"
                     android:textColor="#fff" />
             </LinearLayout>
             <TextView
@@ -190,6 +190,7 @@
 
         <ImageView
             android:id="@+id/back"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#00000000"

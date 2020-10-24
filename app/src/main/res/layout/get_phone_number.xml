@@ -32,13 +32,14 @@
         android:maxLength="15"
         android:focusable="true"
         android:fontFamily="@font/regulare"
-        android:hint="@string/another_number"
+        android:hint="+1 3344344334"
         android:textColorHint="#706F6F"
         app:met_errorColor="#FF4771"
         app:met_floatingLabelAlwaysShown="true"
         app:met_floatingLabelTextSize="15sp"
         app:met_textColorHint="#BCB9B9" />
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/opt"
         android:layout_width="match_parent"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
